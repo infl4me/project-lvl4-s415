@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 const NewMessageForm = () => (
   <Form className="d-flex mt-auto">
-    <Form.Control as="textarea" rows="3" />
+    <Form.Control as="textarea" rows="3" placeholder="Type your message here" />
     <Button variant="secondary" type="submit">Send</Button>
   </Form>
 );
