@@ -1,4 +1,5 @@
 import React from 'react';
+import gon from 'gon';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -21,7 +22,7 @@ const testmessages = [
 ];
 
 const App = () => (
-  <GonProvider value={window.gon}>
+  <GonProvider value={gon}>
     <Container className="p-0" fluid>
       <Row className="vh-100 m-0">
         <Col className="bg-dark p-0 text-white" xs={12} sm={2}>
