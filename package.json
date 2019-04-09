@@ -1,11 +1,6 @@
 {
-  "name": "frontend_l4_chat_project",
+  "name": "slack",
   "version": "0.0.1",
-  "description": "",
-  "main": "dist/index.js",
-  "bin": {
-    "hexlet": "dist/bin/hexlet.js"
-  },
   "engines": {
     "node": "9"
   },
@@ -17,16 +12,8 @@
     "postinstall": "npm run build",
     "start": "node dist/bin/slack.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@bitbucket.org:hexlet/frontend_l4_chat_project.git"
-  },
-  "author": "Kirill Mokevnin",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": ""
-  },
-  "homepage": "",
   "dependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
