@@ -12,19 +12,6 @@ import MessageList from './MessageList';
 import NewMessageForm from './NewMessageForm';
 import UserBlock from './UserBlock';
 
-const testmessages = [
-  {
-    id: 1,
-    author: 'Den',
-    text: 'hi',
-  },
-  {
-    id: 2,
-    author: 'Alex',
-    text: 'hello',
-  },
-];
-
 let username = Cookie.get('username');
 if (!username) {
   username = faker.name.findName();
@@ -42,7 +29,7 @@ const App = () => (
             <ChannelList />
           </Col>
           <Col className="p-0 d-flex flex-column" xs={12} sm={10}>
-            <MessageList messages={testmessages} />
+            <MessageList />
             <NewMessageForm />
           </Col>
         </Row>

@@ -5,11 +5,11 @@ import { withUserName } from './hoc';
 class UserBlock extends React.Component {
   render() {
     const { username } = this.props;
-    const styless = {
-      backgroundColor: '#242a32',
+    const styles = {
+      backgroundColor: '#23272b',
     };
     return (
-      <div style={styless} className="m-3 mb-5 pl-2 rounded">{username}</div>
+      <div style={styles} className="m-3 mb-5 pl-2 rounded">{username}</div>
     );
   }
 }
