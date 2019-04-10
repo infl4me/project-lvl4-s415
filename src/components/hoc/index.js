@@ -1,7 +1,6 @@
-import withGon from './withGon';
 import withUserName from './withUserName';
 
 export {
-  withGon,
+  // eslint-disable-next-line import/prefer-default-export
   withUserName,
 };

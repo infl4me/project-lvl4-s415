@@ -1,27 +1,30 @@
 import React from 'react';
 import gon from 'gon';
-import faker from 'faker';
-import Cookie from 'js-cookie';
+import { connect } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { GonProvider } from './gonContext';
-import { UserNameProvider } from './userNameContext';
 import ChannelList from './ChannelList';
 import MessageList from './MessageList';
 import NewMessageForm from './NewMessageForm';
 import UserBlock from './UserBlock';
+import * as actions from '../actions';
 
-let username = Cookie.get('username');
-if (!username) {
-  username = faker.name.findName();
-  Cookie.set('username', username);
-}
+const mapStateToProps = () => ({});
 
+const actionCreators = {
+  fetchData: actions.fetchData,
+};
 
-const App = () => (
-  <UserNameProvider value={username}>
-    <GonProvider value={gon}>
+@connect(mapStateToProps, actionCreators)
+class App extends React.Component {
+  componentDidMount() {
+    const { fetchData } = this.props;
+    fetchData(gon);
+  }
+
+  render() {
+    return (
       <Container className="p-0" fluid>
         <Row className="vh-100 m-0">
           <Col className="bg-dark p-0 text-white" xs={12} sm={2}>
@@ -34,8 +37,8 @@ const App = () => (
           </Col>
         </Row>
       </Container>
-    </GonProvider>
-  </UserNameProvider>
-);
+    );
+  }
+}
 
 export default App;

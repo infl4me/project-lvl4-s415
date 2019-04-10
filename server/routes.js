@@ -11,32 +11,7 @@ export default (router, io) => {
       { id: generalChannelId, name: 'general', removable: false },
       { id: randomChannelId, name: 'random', removable: false },
     ],
-    messages: [
-      {
-        id: 1,
-        author: 'Den',
-        text: 'hi',
-        channelId: 1,
-      },
-      {
-        id: 2,
-        author: 'Alex',
-        text: 'hello',
-        channelId: 1,
-      },
-      {
-        id: 3,
-        author: 'John',
-        text: 'text1',
-        channelId: 2,
-      },
-      {
-        id: 4,
-        author: 'Sam',
-        text: 'text2',
-        channelId: 2,
-      },
-    ],
+    messages: [],
     currentChannelId: generalChannelId,
   };
 

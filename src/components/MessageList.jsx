@@ -1,36 +1,38 @@
 import React from 'react';
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { withGon } from './hoc';
 import * as actions from '../actions';
 
-const mapStateToProps = ({ channelsUIState: { messages, currentChannelId } }) => ({
-  messages: messages.filter(el => el.channelId !== currentChannelId),
+const mapStateToProps = ({ channels: { currentChannelId }, messages: { byId, allIds } }) => ({
+  messages: allIds.map(id => byId[id]).filter(msg => msg.channelId === currentChannelId),
 });
 
 const actionCreators = {
   changeChannel: actions.changeChannel,
+  addMessage: actions.addMessage,
 };
 
-@withGon()
 @connect(mapStateToProps, actionCreators)
 class MessageList extends React.Component {
   componentDidMount() {
-    // const socket = io();
-    // socket.on('newMessage', (msg) => {
-    //   console.log(msg, 'SOCKET');
-    // });
+    const socket = io();
+    const { addMessage } = this.props;
+    socket.on('newMessage', (msg) => {
+      const message = msg.data.attributes;
+      console.log(message, 'SOCKET');
+      addMessage({ message });
+    });
   }
 
   render() {
     const { messages } = this.props;
-    const items = messages.map(({ id, text, author }) => (
+    const items = messages.map(({ id, message, username }) => (
       <ListGroup.Item
         key={id}
       >
-        <div><b>{author}</b></div>
-        <div>{text}</div>
+        <div><b>{username}</b></div>
+        <div>{message}</div>
       </ListGroup.Item>
     ));
     return (

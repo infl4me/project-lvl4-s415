@@ -2,16 +2,17 @@ import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { withGon } from './hoc';
 import * as actions from '../actions';
 
-const mapStateToProps = ({ channelsUIState: { currentChannelId } }) => ({ currentChannelId });
+const mapStateToProps = ({ channels: { currentChannelId, byId, allIds } }) => ({
+  currentChannelId,
+  channels: allIds.map(id => byId[id]),
+});
 
 const actionCreators = {
   changeChannel: actions.changeChannel,
 };
 
-@withGon()
 @connect(mapStateToProps, actionCreators)
 class ChannelList extends React.Component {
   onChannelChange = id => () => {

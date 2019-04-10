@@ -1,7 +1,7 @@
 import React from 'react';
 import { UserNameConsumer } from '../userNameContext';
 
-const withGon = () => Wrapped => props => (
+const withUserName = () => Wrapped => props => (
   <UserNameConsumer>
     {
       function Consumer(username) {
@@ -11,4 +11,4 @@ const withGon = () => Wrapped => props => (
   </UserNameConsumer>
 );
 
-export default withGon;
+export default withUserName;
