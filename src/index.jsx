@@ -26,16 +26,15 @@ if (!username) {
 }
 
 /* eslint-disable no-underscore-dangle */
-const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
-const devtoolMiddleware = ext && ext();
+const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__;
 /* eslint-enable */
+
+// can't pass undefined to compose
+const args = [applyMiddleware(thunk), reduxDevtools && reduxDevtools()].filter(Boolean);
 
 const store = createStore(
   reducers,
-  compose(
-    applyMiddleware(thunk),
-    devtoolMiddleware,
-  ),
+  compose(...args),
 );
 
 ReactDOM.render(
