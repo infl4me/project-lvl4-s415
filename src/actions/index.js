@@ -19,7 +19,7 @@ export const sendMessage = (channelId, attributes) => async (dispatch) => {
     await axios.post(url, { data: { attributes } });
     dispatch(sendMessageSuccess());
   } catch (e) {
-    dispatch(sendMessageFailure);
+    dispatch(sendMessageFailure());
     throw e;
   }
 };
