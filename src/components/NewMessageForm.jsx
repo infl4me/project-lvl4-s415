@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import * as actions from '../actions';
 import { withUserName } from './hoc';
-import Alert from './Alert';
 
 const Textarea = field => <Form.Control {...field.input} required as="textarea" rows="3" placeholder="Type your message here" />;
 
 const actionCreators = {
   sendMessage: actions.sendMessage,
+  addError: actions.addError,
 };
 
 const mapStateToProps = ({ channels: { currentChannelId } }) => ({ currentChannelId });
@@ -21,21 +21,21 @@ const mapStateToProps = ({ channels: { currentChannelId } }) => ({ currentChanne
 class NewMessageForm extends React.Component {
   handleSubmit = async (values) => {
     const {
-      reset, sendMessage, username, currentChannelId,
+      addError, reset, sendMessage, username, currentChannelId,
     } = this.props;
     reset();
     try {
       await sendMessage(currentChannelId, { username, ...values });
     } catch (e) {
+      addError(e);
       throw new SubmissionError({ _error: e.message });
     }
   }
 
   render() {
-    const { handleSubmit, error } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <Form className="d-flex mt-auto" onSubmit={handleSubmit(this.handleSubmit)}>
-        {error && <Alert />}
         <Field name="message" component={Textarea} />
         <Button variant="secondary" type="submit">Send</Button>
       </Form>

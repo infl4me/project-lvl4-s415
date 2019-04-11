@@ -51,9 +51,16 @@ const messageSendingState = handleActions({
   },
 }, 'none');
 
+const error = handleActions({
+  [actions.addError](state, { payload: { errMessage } }) {
+    return errMessage;
+  },
+}, null);
+
 export default combineReducers({
   channels,
   messages,
   messageSendingState,
+  error,
   form: formReducer,
 });

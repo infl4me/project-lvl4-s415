@@ -7,6 +7,7 @@ export const addMessage = createAction('MESSAGE_ADD');
 
 export const changeChannel = createAction('CHANNEL_CHANGE');
 
+export const addError = createAction('ERROR_ADD');
 
 export const sendMessageRequest = createAction('MESSAGE_SEND_REQUEST');
 export const sendMessageSuccess = createAction('MESSAGE_SEND_SUCCESS');

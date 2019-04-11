@@ -11,17 +11,26 @@ const mapStateToProps = ({ channels: { currentChannelId }, messages: { byId, all
 const actionCreators = {
   changeChannel: actions.changeChannel,
   addMessage: actions.addMessage,
+  addError: actions.addError,
 };
 
 @connect(mapStateToProps, actionCreators)
 class MessageList extends React.Component {
   componentDidMount() {
     const socket = io();
-    const { addMessage } = this.props;
+    const { addMessage, addError } = this.props;
     socket.on('newMessage', (msg) => {
       const message = msg.data.attributes;
       console.log(message, 'SOCKET');
       addMessage({ message });
+    });
+    socket.on('error', () => {
+      console.log('SOCKET_ERR');
+      addError({ errMessage: 'err' });
+    });
+    socket.on('connect_error', () => {
+      console.log('SOCKET_CONNECT_ERR');
+      addError({ errMessage: 'connect_error' });
     });
   }
 
