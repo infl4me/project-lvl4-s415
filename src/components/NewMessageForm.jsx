@@ -27,7 +27,7 @@ class NewMessageForm extends React.Component {
     try {
       await sendMessage(currentChannelId, { username, ...values });
     } catch (e) {
-      addError(e);
+      addError({ errMessage: 'message sending error' });
       throw new SubmissionError({ _error: e.message });
     }
   }

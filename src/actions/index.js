@@ -6,6 +6,8 @@ export const fetchData = createAction('DATA_FETCH');
 export const addMessage = createAction('MESSAGE_ADD');
 
 export const changeChannel = createAction('CHANNEL_CHANGE');
+export const showModal = createAction('MODAL_SHOW');
+export const removeModal = createAction('MODAL_REMOVE');
 
 export const addError = createAction('ERROR_ADD');
 

@@ -1,16 +1,28 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import ModalDelete from './ModalDelete';
 
-const mapStateToProps = ({ channels: { currentChannelId, byId, allIds } }) => ({
-  currentChannelId,
-  channels: allIds.map(id => byId[id]),
-});
+const mapStateToProps = (state) => {
+  const {
+    channels: {
+      modal, currentChannelId, byId, allIds,
+    },
+  } = state;
+  return {
+    currentChannelId,
+    modal,
+    channels: allIds.map(id => byId[id]),
+  };
+};
 
 const actionCreators = {
   changeChannel: actions.changeChannel,
+  showModal: actions.showModal,
+  removeModal: actions.removeModal,
 };
 
 @connect(mapStateToProps, actionCreators)
@@ -20,32 +32,45 @@ class ChannelList extends React.Component {
     changeChannel({ id });
   }
 
+  // onChannelRename = (id, name) => () => {
+
+  // }
+
+  onChannelDelete = (id, name) => () => {
+    const { showChannelDeleteModal } = this.props;
+    const renderModalBody = handleClose => (
+      <ModalDelete id={id} name={name} handleClose={handleClose} />
+    );
+    showChannelDeleteModal({ modalState: 'CHANNEL_DELETE', modalProps: { renderModalBody } });
+  }
+
   render() {
     const { channels, currentChannelId } = this.props;
     const items = channels.map(({ id, name }) => {
-      const styles = {
-        backgroundColor: currentChannelId === id ? '#23272b' : '',
-      };
+      const isActive = currentChannelId === id;
       return (
-        <ListGroup.Item
-          key={id}
-          className="bg-transparent p-0"
-        >
-          <Button
-            className="px-3 py-2 w-100 h-100"
-            style={styles}
-            variant="dark"
-            onClick={this.onChannelChange(id)}
+        <React.Fragment key={id}>
+          <div
+            className="p-0"
           >
-            {name}
-          </Button>
-        </ListGroup.Item>
+            <Dropdown as={ButtonGroup}>
+              <Button variant={isActive ? 'secondary' : 'dark'} onClick={this.onChannelChange(id)}>{name}</Button>
+
+              <Dropdown.Toggle variant={isActive ? 'secondary' : 'dark'} id="dropdown-split-basic" />
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={this.onChannelRename(id, name)}>Rename</Dropdown.Item>
+                <Dropdown.Item onClick={this.onChannelDelete(id, name)}>Delete</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        </React.Fragment>
       );
     });
     return (
       <React.Fragment>
         <h3 className="m-3">Channels</h3>
-        <ListGroup>{items}</ListGroup>
+        <div>{items}</div>
       </React.Fragment>
     );
   }

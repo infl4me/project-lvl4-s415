@@ -10,6 +10,7 @@ import NewMessageForm from './NewMessageForm';
 import UserBlock from './UserBlock';
 import * as actions from '../actions';
 import Alert from './Alert';
+import ModalCustom from './Modal';
 
 const mapStateToProps = ({ error }) => ({ error });
 
@@ -29,6 +30,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         {error && <Alert />}
+        <ModalCustom />
         <Container className="p-0" fluid>
           <Row className="vh-100 m-0">
             <Col className="bg-dark p-0 text-white" xs={12} sm={2}>

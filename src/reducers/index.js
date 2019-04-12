@@ -11,6 +11,7 @@ const transformToStateShape = coll => coll.reduce((state, item) => ({
 const channels = handleActions({
   [actions.fetchData](state, { payload }) {
     return {
+      ...state,
       ...transformToStateShape(payload.channels),
       currentChannelId: payload.currentChannelId,
     };
@@ -51,6 +52,21 @@ const messageSendingState = handleActions({
   },
 }, 'none');
 
+const modal = handleActions({
+  [actions.showModal](state, { payload: { modalState, modalProps } }) {
+    return {
+      modalState,
+      modalProps,
+    };
+  },
+  [actions.removeModal]() {
+    return {
+      modalState: 'none',
+      modalProps: {},
+    };
+  },
+}, { modalState: 'none', modalProps: {} });
+
 const error = handleActions({
   [actions.addError](state, { payload: { errMessage } }) {
     return errMessage;
@@ -62,5 +78,6 @@ export default combineReducers({
   messages,
   messageSendingState,
   error,
+  modal,
   form: formReducer,
 });
