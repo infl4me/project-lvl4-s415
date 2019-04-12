@@ -32,16 +32,16 @@ class ChannelList extends React.Component {
     changeChannel({ id });
   }
 
-  // onChannelRename = (id, name) => () => {
+  onChannelRename = () => () => {
 
-  // }
+  }
 
   onChannelDelete = (id, name) => () => {
-    const { showChannelDeleteModal } = this.props;
+    const { showModal } = this.props;
     const renderModalBody = handleClose => (
       <ModalDelete id={id} name={name} handleClose={handleClose} />
     );
-    showChannelDeleteModal({ modalState: 'CHANNEL_DELETE', modalProps: { renderModalBody } });
+    showModal({ modalState: 'CHANNEL_DELETE', modalProps: { renderModalBody } });
   }
 
   render() {
