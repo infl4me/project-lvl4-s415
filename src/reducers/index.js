@@ -58,7 +58,7 @@ const messages = handleActions({
     };
   },
   [actions.removeChannel](state, { payload: { id } }) {
-    const newById = _.omitBy(state.byId, chId => chId !== id);
+    const newById = _.omitBy(state.byId, msg => msg.channelId === id);
     return {
       ...state,
       byId: newById,
