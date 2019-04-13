@@ -10,7 +10,7 @@ const Textarea = field => <Form.Control {...field.input} required as="textarea" 
 
 const actionCreators = {
   sendMessage: actions.sendMessage,
-  addError: actions.addError,
+  showAlert: actions.showAlert,
 };
 
 const mapStateToProps = ({ channels: { currentChannelId } }) => ({ currentChannelId });
@@ -21,13 +21,13 @@ const mapStateToProps = ({ channels: { currentChannelId } }) => ({ currentChanne
 class NewMessageForm extends React.Component {
   handleSubmit = async (values) => {
     const {
-      addError, reset, sendMessage, username, currentChannelId,
+      showAlert, reset, sendMessage, username, currentChannelId,
     } = this.props;
     reset();
     try {
       await sendMessage(currentChannelId, { username, ...values });
     } catch (e) {
-      addError({ errMessage: 'message sending error' });
+      showAlert({ errMessage: 'There was a problem sending your message ' });
       throw new SubmissionError({ _error: e.message });
     }
   }

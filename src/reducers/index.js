@@ -143,7 +143,7 @@ const modal = handleActions({
 }, { modalState: 'none', modalProps: {} });
 
 const error = handleActions({
-  [actions.addError](state, { payload: { errMessage } }) {
+  [actions.showAlert](state, { payload: { errMessage } }) {
     return errMessage;
   },
 }, null);

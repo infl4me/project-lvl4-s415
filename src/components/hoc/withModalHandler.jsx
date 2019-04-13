@@ -39,14 +39,14 @@ export default (form, action) => (Wrapped) => {
     handleSubmit = (...args) => async (values) => {
       const inputValue = values[form];
       const {
-        addError, reset, handleClose,
+        showAlert, reset, handleClose,
       } = this.props;
       reset();
       try {
         // eslint-disable-next-line react/destructuring-assignment
         await this.props[action](...args, inputValue);
       } catch (e) {
-        addError({ errMessage: 'Error occurred while processing your request' });
+        showAlert({ errMessage: 'Error occurred while processing your request' });
         throw new SubmissionError({ _error: e.message });
       } finally {
         handleClose();

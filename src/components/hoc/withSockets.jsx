@@ -46,19 +46,19 @@ export default () => (Wrapped) => {
   class WithSocket extends React.Component {
     componentDidMount() {
       const socket = io();
-      const { addError } = this.props;
+      const { showAlert } = this.props;
       events.forEach(({ name, cb }) => {
         socket.on(name, cb(this.props));
       });
 
       socket.on('error', () => {
         console.log('SOCKET_ERR');
-        addError({ errMessage: 'err' });
+        showAlert({ errMessage: 'Connection has been lost' });
       });
 
       socket.on('connect_error', () => {
         console.log('SOCKET_CONNECT_ERR');
-        addError({ errMessage: 'connect_error' });
+        showAlert({ errMessage: 'Connection has been lost' });
       });
     }
 

@@ -20,7 +20,7 @@ export const showModal = createAction('MODAL_SHOW');
 export const removeModal = createAction('MODAL_REMOVE');
 
 
-export const addError = createAction('ERROR_ADD');
+export const showAlert = createAction('ALERT_SHOW_ERR');
 
 
 export const sendMessageRequest = createAction('MESSAGE_SEND_REQUEST');
