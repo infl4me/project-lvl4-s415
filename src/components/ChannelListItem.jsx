@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-import ModalDeleteChannel from './ModalDeleteChannel';
-import ModalRenameChannel from './ModalRenameChannel';
+import ModalChannelDelete from './ModalChannelDelete';
+import ModalChannelRename from './ModalChannelRename';
 import * as actions from '../actions';
 
 const mapStateToProps = ({ channels: { currentChannelId } }) => ({ currentChannelId });
@@ -12,7 +12,6 @@ const mapStateToProps = ({ channels: { currentChannelId } }) => ({ currentChanne
 const actionCreators = {
   changeChannel: actions.changeChannel,
   showModal: actions.showModal,
-  removeModal: actions.removeModal,
 };
 
 @connect(mapStateToProps, actionCreators)
@@ -22,20 +21,12 @@ class ChannelListItem extends React.Component {
     changeChannel({ id });
   }
 
-  onChannelRename = (id, name) => () => {
-    const { showModal } = this.props;
+  onChannelAction = (modalState, Component) => () => {
+    const { showModal, id, name } = this.props;
     const renderModalBody = handleClose => (
-      <ModalRenameChannel id={id} name={name} handleClose={handleClose} />
+      <Component id={id} name={name} handleClose={handleClose} />
     );
-    showModal({ modalState: 'CHANNEL_RENAME', modalProps: { renderModalBody } });
-  }
-
-  onChannelDelete = (id, name) => () => {
-    const { showModal } = this.props;
-    const renderModalBody = handleClose => (
-      <ModalDeleteChannel id={id} name={name} handleClose={handleClose} />
-    );
-    showModal({ modalState: 'CHANNEL_DELETE', modalProps: { renderModalBody } });
+    showModal({ modalState, modalProps: { renderModalBody } });
   }
 
   render() {
@@ -43,6 +34,7 @@ class ChannelListItem extends React.Component {
       id, name, currentChannelId, removable,
     } = this.props;
     const isActive = currentChannelId === id;
+
     return (
       <div>
         <Dropdown as={ButtonGroup}>
@@ -51,9 +43,9 @@ class ChannelListItem extends React.Component {
           <Dropdown.Toggle variant={isActive ? 'secondary' : 'dark'} id="dropdown-split-basic" />
 
           <Dropdown.Menu>
-            <Dropdown.Item onClick={this.onChannelRename(id, name)}>Rename</Dropdown.Item>
+            <Dropdown.Item onClick={this.onChannelAction('CHANNEL_RENAME', ModalChannelRename)}>Rename</Dropdown.Item>
             {removable
-              && <Dropdown.Item onClick={this.onChannelDelete(id, name)}>Delete</Dropdown.Item>
+              && <Dropdown.Item onClick={this.onChannelAction('CHANNEL_DELETE', ModalChannelDelete)}>Delete</Dropdown.Item>
             }
           </Dropdown.Menu>
         </Dropdown>

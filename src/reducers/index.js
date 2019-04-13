@@ -38,6 +38,12 @@ const channels = handleActions({
       allIds: state.allIds.filter(chId => chId !== id),
     };
   },
+  [actions.renameChannel](state, { payload: { channel } }) {
+    return {
+      ...state,
+      byId: { ...state.byId, [channel.id]: channel },
+    };
+  },
 }, { byId: {}, allIds: [], currentChannelId: 1 });
 
 const messages = handleActions({
@@ -91,17 +97,17 @@ const newChannelPassingState = handleActions({
   },
 }, 'none');
 
-const channelNewNamePassingState = handleActions({
-  [actions.passChannelNewNameRequest]() {
-    console.log('passChannelNewNameRequest');
+const channelRenamePassingState = handleActions({
+  [actions.passChannelRenameRequest]() {
+    console.log('passChannelRenameRequest');
     return 'requested';
   },
-  [actions.passChannelNewNameFailure]() {
-    console.log('passChannelNewNameFailure');
+  [actions.passChannelRenameFailure]() {
+    console.log('passChannelRenameFailure');
     return 'failed';
   },
-  [actions.passChannelNewNameSuccess]() {
-    console.log('passChannelNewNameSuccess');
+  [actions.passChannelRenameSuccess]() {
+    console.log('passChannelRenameSuccess');
     return 'finished';
   },
 }, 'none');
@@ -147,7 +153,7 @@ export default combineReducers({
   messages,
   messageSendingState,
   newChannelPassingState,
-  channelNewNamePassingState,
+  channelRenamePassingState,
   channelDeletePassingState,
   error,
   modal,

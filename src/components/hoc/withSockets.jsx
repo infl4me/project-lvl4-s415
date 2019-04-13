@@ -28,6 +28,14 @@ const events = [
       addMessage({ message });
     },
   },
+  {
+    name: 'renameChannel',
+    cb: ({ renameChannel }) => ({ data }) => {
+      const channel = data.attributes;
+      console.log(channel, 'SOCKET_CHANNEL_RENAME');
+      renameChannel({ channel });
+    },
+  },
 ];
 
 

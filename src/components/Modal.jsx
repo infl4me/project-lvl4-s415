@@ -30,7 +30,7 @@ class ModalCustom extends React.Component {
     }
     return (
       <Modal show={haveModal} onHide={this.handleClose}>
-        {renderModalBody(this.handleClose)}
+        {renderModalBody(this.handleClose, this.textInput)}
       </Modal>
     );
   }

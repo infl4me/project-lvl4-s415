@@ -15,8 +15,8 @@ const actionCreators = {
 class ChannelsListHeader extends React.Component {
   onAddNewChannel = () => {
     const { showModal } = this.props;
-    const renderModalBody = handleClose => (
-      <ModalNewChannel handleClose={handleClose} />
+    const renderModalBody = (handleClose, reff) => (
+      <ModalNewChannel handleClose={handleClose} reff={reff} />
     );
     showModal({ modalState: 'CHANNEL_ADD_NEW', modalProps: { renderModalBody } });
   }

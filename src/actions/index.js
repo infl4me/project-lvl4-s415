@@ -56,18 +56,18 @@ export const passNewChannel = name => async (dispatch) => {
   }
 };
 
-export const passChannelNewNameRequest = createAction('CHANNEL_NEWNAME_REQUEST');
-export const passChannelNewNameSuccess = createAction('CHANNEL_NEWNAME_SUCCESS');
-export const passChannelNewNameFailure = createAction('CHANNEL_NEWNAME_FAILURE');
+export const passChannelRenameRequest = createAction('CHANNEL_RENAME_REQUEST');
+export const passChannelRenameSuccess = createAction('CHANNEL_RENAME_SUCCESS');
+export const passChannelRenameFailure = createAction('CHANNEL_RENAME_FAILURE');
 
-export const passChannelNewName = (id, name) => async (dispatch) => {
-  dispatch(passChannelNewNameRequest());
+export const passChannelRename = (id, name) => async (dispatch) => {
+  dispatch(passChannelRenameRequest());
   try {
     const url = `${apiBase}/channels/${id}`;
     await axios.patch(url, { data: { attributes: { name } } });
-    dispatch(passChannelNewNameSuccess());
+    dispatch(passChannelRenameSuccess());
   } catch (e) {
-    dispatch(passChannelNewNameFailure());
+    dispatch(passChannelRenameFailure());
     throw e;
   }
 };
