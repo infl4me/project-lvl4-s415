@@ -8,13 +8,13 @@ import * as actions from '../../actions';
 
 const renderField = (props) => {
   const {
-    input, type, refLink, placeholder,
+    input, type, refLink, placeholder, required,
     meta: { error },
   } = props;
   return (
     <React.Fragment>
-      <Form.Control {...input} placeholder={placeholder} required ref={refLink} type={type} />
-      {error && <span>{error}</span>}
+      <Form.Control {...input} placeholder={placeholder} required={required} ref={refLink} type={type} autoComplete="off" />
+      {error && <div className="text-danger mt-2">{error}</div>}
     </React.Fragment>
   );
 };
