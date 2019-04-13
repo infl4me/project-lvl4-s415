@@ -1,15 +1,21 @@
 import React from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { withUserName } from './hoc';
 
 @withUserName()
 class UserBlock extends React.Component {
   render() {
     const { username } = this.props;
-    const styles = {
-      backgroundColor: '#23272b',
-    };
     return (
-      <div style={styles} className="m-3 mb-5 pl-2 rounded">{username}</div>
+      <Dropdown>
+        <Dropdown.Toggle variant="dark" id="dropdown-basic">
+          {username}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     );
   }
 }

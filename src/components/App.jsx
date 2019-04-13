@@ -11,6 +11,7 @@ import UserBlock from './UserBlock';
 import * as actions from '../actions';
 import Alert from './Alert';
 import ModalCustom from './Modal';
+import { withSockets } from './hoc';
 
 const mapStateToProps = ({ error }) => ({ error });
 
@@ -18,6 +19,7 @@ const actionCreators = {
   fetchData: actions.fetchData,
 };
 
+@withSockets()
 @connect(mapStateToProps, actionCreators)
 class App extends React.Component {
   componentDidMount() {
@@ -32,12 +34,12 @@ class App extends React.Component {
         {error && <Alert />}
         <ModalCustom />
         <Container className="p-0" fluid>
-          <Row className="vh-100 m-0">
-            <Col className="bg-dark p-0 text-white" xs={12} sm={2}>
+          <Row className="vh-100 no-gutters">
+            <Col className="bg-dark p-0 text-white pl-3" md={2}>
               <UserBlock />
               <ChannelList />
             </Col>
-            <Col className="p-0 d-flex flex-column" xs={12} sm={10}>
+            <Col className="p-0 d-flex flex-column" md={10}>
               <MessageList />
               <NewMessageForm />
             </Col>

@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import thunk from 'redux-thunk';
 import faker from 'faker';
 import Cookie from 'js-cookie';
@@ -11,6 +13,8 @@ import App from './components/App';
 import { UserNameProvider } from './components/userNameContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
+
+library.add(faPlus);
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
