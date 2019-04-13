@@ -13,7 +13,9 @@ import Alert from './Alert';
 import ModalCustom from './Modal';
 import { withSockets } from './hoc';
 
-const mapStateToProps = ({ error, modal: { modalState } }) => ({ error, modalState });
+const mapStateToProps = ({ error: { errorState }, modal: { modalState } }) => (
+  { errorState, modalState }
+);
 
 const actionCreators = {
   fetchData: actions.fetchData,
@@ -28,10 +30,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { error, modalState } = this.props;
+    const { errorState, modalState } = this.props;
     return (
       <React.Fragment>
-        {error && <Alert />}
+        {errorState !== 'none' ? <Alert /> : null}
         {modalState !== 'none' ? <ModalCustom /> : null}
         <Container className="p-0" fluid>
           <Row className="vh-100 no-gutters">

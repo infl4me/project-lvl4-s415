@@ -46,7 +46,7 @@ export default (form, action) => (Wrapped) => {
         // eslint-disable-next-line react/destructuring-assignment
         await this.props[action](...args, inputValue);
       } catch (e) {
-        showAlert({ errMessage: 'Error occurred while processing your request' });
+        showAlert({ errorProps: { message: 'Error occurred while processing your request' } });
         throw new SubmissionError({ _error: e.message });
       } finally {
         handleClose();

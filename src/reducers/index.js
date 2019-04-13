@@ -143,10 +143,19 @@ const modal = handleActions({
 }, { modalState: 'none', modalProps: {} });
 
 const error = handleActions({
-  [actions.showAlert](state, { payload: { errMessage } }) {
-    return errMessage;
+  [actions.showAlert](state, { payload: { errorState, errorProps } }) {
+    return {
+      errorState,
+      errorProps,
+    };
   },
-}, null);
+  [actions.removeAlert]() {
+    return {
+      errorState: 'none',
+      errorProps: {},
+    };
+  },
+}, { errorState: 'none', errorProps: {} });
 
 export default combineReducers({
   channels,

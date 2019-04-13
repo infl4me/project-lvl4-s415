@@ -53,12 +53,12 @@ export default () => (Wrapped) => {
 
       socket.on('error', () => {
         console.log('SOCKET_ERR');
-        showAlert({ errMessage: 'Connection has been lost' });
+        showAlert({ errorProps: { message: 'Connection has been lost' } });
       });
 
       socket.on('connect_error', () => {
         console.log('SOCKET_CONNECT_ERR');
-        showAlert({ errMessage: 'Connection has been lost' });
+        showAlert({ errorProps: { message: 'Connection has been lost' } });
       });
     }
 

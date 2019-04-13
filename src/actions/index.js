@@ -21,6 +21,7 @@ export const removeModal = createAction('MODAL_REMOVE');
 
 
 export const showAlert = createAction('ALERT_SHOW_ERR');
+export const removeAlert = createAction('ALERT_REMOVE');
 
 
 export const sendMessageRequest = createAction('MESSAGE_SEND_REQUEST');
