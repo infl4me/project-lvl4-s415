@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default (action = 'focus') => (Wrapped) => {
+export default action => (Wrapped) => {
   class AutoFocusTextInput extends React.Component {
     constructor(props) {
       super(props);
@@ -13,7 +13,9 @@ export default (action = 'focus') => (Wrapped) => {
 
     handleFocusTextInput = () => {
       this.textInput.current.focus();
-      this.textInput.current[action]();
+      if (action) {
+        this.textInput.current[action]();
+      }
     };
 
     render() {
