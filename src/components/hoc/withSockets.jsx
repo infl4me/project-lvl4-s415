@@ -43,7 +43,7 @@ export default () => (Wrapped) => {
   const mapStateToProps = () => ({});
 
   @connect(mapStateToProps, actions)
-  class WithSocket extends React.Component {
+  class WithSockets extends React.Component {
     componentDidMount() {
       const socket = io();
       const { showAlert } = this.props;
@@ -68,5 +68,5 @@ export default () => (Wrapped) => {
     }
   }
 
-  return WithSocket;
+  return WithSockets;
 };

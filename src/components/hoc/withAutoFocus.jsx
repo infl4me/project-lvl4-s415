@@ -12,6 +12,7 @@ export default (action = 'focus') => (Wrapped) => {
     }
 
     handleFocusTextInput = () => {
+      this.textInput.current.focus();
       this.textInput.current[action]();
     };
 

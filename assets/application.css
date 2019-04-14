@@ -5,12 +5,3 @@
 textarea {
   resize: none;
 }
-
-.channel-list-item button:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.channel-list-item svg {
-  color: #ddd;
-}
