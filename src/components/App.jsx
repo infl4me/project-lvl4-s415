@@ -1,5 +1,4 @@
 import React from 'react';
-import gon from 'gon';
 import { connect } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -26,7 +25,7 @@ const actionCreators = {
 class App extends React.Component {
   componentDidMount() {
     const { fetchData } = this.props;
-    fetchData(gon);
+    fetchData();
   }
 
   render() {

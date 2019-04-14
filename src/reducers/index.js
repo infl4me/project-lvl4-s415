@@ -10,7 +10,7 @@ const transformToStateShape = coll => coll.reduce((state, item) => ({
 }), { byId: {}, allIds: [] });
 
 const channels = handleActions({
-  [actions.fetchData](state, { payload }) {
+  [actions.addData](state, { payload }) {
     return {
       ...state,
       ...transformToStateShape(payload.channels),
@@ -47,7 +47,7 @@ const channels = handleActions({
 }, { byId: {}, allIds: [], currentChannelId: 1 });
 
 const messages = handleActions({
-  [actions.fetchData](state, { payload }) {
+  [actions.addData](state, { payload }) {
     return transformToStateShape(payload.messages);
   },
   [actions.addMessage](state, { payload: { message } }) {

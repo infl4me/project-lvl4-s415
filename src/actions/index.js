@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { createAction } from 'redux-actions';
+import gon from 'gon';
 
 const apiBase = '/api/v1';
 
-
-export const fetchData = createAction('DATA_FETCH');
+export const addData = createAction('DATA_ADD');
+export const fetchData = () => (dispatch) => {
+  dispatch(addData(gon));
+};
 
 
 export const addMessage = createAction('MESSAGE_ADD');
