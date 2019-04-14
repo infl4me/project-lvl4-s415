@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { channelsSelector } from '../../selectors';
 
-const mapStateToProps = (state) => {
-  const { channels: { byId, allIds } } = state;
-  return {
-    channels: allIds.map(id => byId[id]),
-  };
-};
+const mapStateToProps = state => ({
+  channels: channelsSelector(state),
+});
 
 export default () => (Wrapped) => {
   @connect(mapStateToProps)

@@ -4,7 +4,9 @@ import gon from 'gon';
 
 const apiBase = '/api/v1';
 
+
 export const addData = createAction('DATA_ADD');
+
 export const fetchData = () => (dispatch) => {
   dispatch(addData(gon));
 };

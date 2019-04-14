@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { filteredMessagesSelector } from '../selectors';
 
-const mapStateToProps = ({ channels: { currentChannelId }, messages: { byId, allIds } }) => ({
-  messages: allIds.map(id => byId[id]).filter(msg => msg.channelId === currentChannelId),
+const mapStateToProps = state => ({
+  messages: filteredMessagesSelector(state),
 });
 
 @connect(mapStateToProps)
