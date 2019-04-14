@@ -7,7 +7,7 @@ class UserBlock extends React.Component {
   render() {
     const { username } = this.props;
     return (
-      <Dropdown>
+      <Dropdown className="mb-3 ml-3">
         <Dropdown.Toggle variant="dark" id="dropdown-basic">
           {username}
         </Dropdown.Toggle>

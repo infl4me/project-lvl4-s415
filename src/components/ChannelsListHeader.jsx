@@ -23,8 +23,8 @@ class ChannelsListHeader extends React.Component {
 
   render() {
     return (
-      <div className="mb-3 d-flex">
-        <h3 className="m-0">Channels</h3>
+      <div className="mb-2 d-flex pl-3">
+        <h3 className="m-0 mr-1">Channels</h3>
         <Button onClick={this.onAddNewChannel} variant="dark">
           <FontAwesomeIcon icon="plus" />
         </Button>

@@ -18,7 +18,7 @@ class ChannelList extends React.Component {
     return (
       <React.Fragment>
         <ChannelsListHeader />
-        <div>{items}</div>
+        <div className="pl-3 pr-3">{items}</div>
       </React.Fragment>
     );
   }

@@ -34,13 +34,13 @@ class ChannelListItem extends React.Component {
       id, name, currentChannelId, removable,
     } = this.props;
     const isActive = currentChannelId === id;
-
     return (
-      <div>
+      <div className="channel-list-item">
         <Dropdown as={ButtonGroup}>
           <Button variant={isActive ? 'secondary' : 'dark'} onClick={this.onChannelChange(id)}>{name}</Button>
 
-          <Dropdown.Toggle variant={isActive ? 'secondary' : 'dark'} id="dropdown-split-basic" />
+          <Dropdown.Toggle variant={isActive ? 'secondary' : 'dark'} id="dropdown-split-basic">
+          </Dropdown.Toggle>
 
           <Dropdown.Menu>
             <Dropdown.Item onClick={this.onChannelAction('CHANNEL_RENAME', ModalChannelRename)}>Rename</Dropdown.Item>
