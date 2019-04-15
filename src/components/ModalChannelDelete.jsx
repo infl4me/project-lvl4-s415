@@ -7,12 +7,12 @@ import { withModalHandler } from './hoc';
 class ModalChannelDelete extends React.Component {
   render() {
     const {
-      name, handleClose, handleSubmit, submitting,
-      renderFooter, handleConfirm, id,
+      channel, handleClose, handleSubmit, submitting,
+      renderFooter, handleConfirm,
     } = this.props;
     return (
-      <Form onSubmit={handleSubmit(handleConfirm(id))}>
-        <Modal.Header>{`Are you sure you want to delete '${name}' channel?`}</Modal.Header>
+      <Form onSubmit={handleSubmit(handleConfirm(channel.id))}>
+        <Modal.Header>{`Are you sure you want to delete '${channel.name}' channel?`}</Modal.Header>
         {renderFooter(false, submitting, handleClose)}
       </Form>
     );

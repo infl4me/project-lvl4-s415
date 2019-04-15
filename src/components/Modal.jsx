@@ -1,23 +1,25 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
-import * as actions from '../actions';
+import connect from '../connect';
 
 const mapStateToProps = ({ modal: { modalState, modalProps } }) => ({ modalState, modalProps });
 
-const actionCreators = {
-  removeModal: actions.removeModal,
-};
-
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 class ModalCustom extends React.Component {
+  componentDidMount() {
+    console.log('Modal mounted');
+  }
+
+  componentWillUnmount() {
+    console.log('Modal unmounted');
+  }
+
   handleClose = () => {
     const { removeModal } = this.props;
     removeModal();
   }
 
   render() {
-    console.log('main modal render');
     const {
       modalState,
       modalProps: {

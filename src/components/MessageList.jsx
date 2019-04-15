@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { filteredMessagesSelector } from '../selectors';
+import connect from '../connect';
 
 const mapStateToProps = state => ({
   messages: filteredMessagesSelector(state),

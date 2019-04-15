@@ -2,10 +2,9 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import keydown from 'react-keydown';
-import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import * as actions from '../actions';
 import { withUserName, withFormValidation } from './hoc';
+import connect from '../connect';
 
 const Textarea = (field) => {
   const { input } = field;
@@ -14,17 +13,12 @@ const Textarea = (field) => {
   );
 };
 
-const actionCreators = {
-  sendMessage: actions.sendMessage,
-  showAlert: actions.showAlert,
-};
-
 const mapStateToProps = ({ channels: { currentChannelId } }) => ({ currentChannelId });
 
 @withUserName()
 @reduxForm({ form: 'newMessage' })
 @withFormValidation()
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 class NewMessageForm extends React.Component {
   constructor(props) {
     super(props);

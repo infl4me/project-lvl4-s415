@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 // If the value is valid, the validation function should return undefined.
 import React from 'react';
-import { connect } from 'react-redux';
 import { channelsSelector } from '../../selectors';
+import connect from '../../connect';
 
 const mapStateToProps = state => ({
   channels: channelsSelector(state),

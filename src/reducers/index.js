@@ -67,66 +67,6 @@ const messages = handleActions({
   },
 }, { byId: {}, allIds: [] });
 
-const messageSendingState = handleActions({
-  [actions.sendMessageRequest]() {
-    console.log('sendMessageRequest');
-    return 'requested';
-  },
-  [actions.sendMessageFailure]() {
-    console.log('sendMessageFailure');
-    return 'failed';
-  },
-  [actions.sendMessageSuccess]() {
-    console.log('sendMessageSuccess');
-    return 'finished';
-  },
-}, 'none');
-
-const newChannelPassingState = handleActions({
-  [actions.passNewChannelRequest]() {
-    console.log('passNewChannelRequest');
-    return 'requested';
-  },
-  [actions.passNewChannelFailure]() {
-    console.log('passNewChannelFailure');
-    return 'failed';
-  },
-  [actions.passNewChannelSuccess]() {
-    console.log('passNewChannelSuccess');
-    return 'finished';
-  },
-}, 'none');
-
-const channelRenamePassingState = handleActions({
-  [actions.passChannelRenameRequest]() {
-    console.log('passChannelRenameRequest');
-    return 'requested';
-  },
-  [actions.passChannelRenameFailure]() {
-    console.log('passChannelRenameFailure');
-    return 'failed';
-  },
-  [actions.passChannelRenameSuccess]() {
-    console.log('passChannelRenameSuccess');
-    return 'finished';
-  },
-}, 'none');
-
-const channelDeletePassingState = handleActions({
-  [actions.passChannelDeleteRequest]() {
-    console.log('passChannelDeleteRequest');
-    return 'requested';
-  },
-  [actions.passChannelDeleteFailure]() {
-    console.log('passChannelDeleteFailure');
-    return 'failed';
-  },
-  [actions.passChannelDeleteSuccess]() {
-    console.log('passChannelDeleteSuccess');
-    return 'finished';
-  },
-}, 'none');
-
 const modal = handleActions({
   [actions.showModal](state, { payload: { modalState, modalProps } }) {
     return {
@@ -160,10 +100,6 @@ const error = handleActions({
 export default combineReducers({
   channels,
   messages,
-  messageSendingState,
-  newChannelPassingState,
-  channelRenamePassingState,
-  channelDeletePassingState,
   error,
   modal,
   form: formReducer,

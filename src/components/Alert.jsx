@@ -1,16 +1,11 @@
 import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
+import connect from '../connect';
 
 const mapStateToProps = ({ error: { errorState, errorProps } }) => ({ errorState, errorProps });
 
-const actionCreators = {
-  removeAlert: actions.removeAlert,
-};
-
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 class AlertDismissible extends React.Component {
   handleClose = () => {
     const { removeAlert } = this.props;

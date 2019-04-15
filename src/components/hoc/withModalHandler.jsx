@@ -1,10 +1,9 @@
 import React from 'react';
 import { reduxForm, SubmissionError } from 'redux-form';
-import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import * as actions from '../../actions';
+import connect from '../../connect';
 
 const renderField = (props) => {
   const {
@@ -31,10 +30,8 @@ const renderFooter = (pristine, submitting, handleClose) => (
 
 
 export default (form, action) => (Wrapped) => {
-  const mapStateToProps = () => ({});
-
   @reduxForm({ form })
-  @connect(mapStateToProps, actions)
+  @connect()
   class WithModalHandler extends React.Component {
     handleSubmit = (...args) => async (values) => {
       const inputValue = values[form];

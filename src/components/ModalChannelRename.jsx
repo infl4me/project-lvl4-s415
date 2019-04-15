@@ -9,19 +9,19 @@ import { withAutoFocus, withFormValidation, withModalHandler } from './hoc';
 @withFormValidation()
 class ModalChannelRename extends React.Component {
   componentDidMount() {
-    const { initialize, name } = this.props;
+    const { initialize, channel: { name } } = this.props;
     initialize({ newNameOfChannel: name });
   }
 
   render() {
     const {
-      name, handleClose, handleSubmit, refLink, submitting, pristine,
-      renderFooter, handleConfirm, renderField, id,
+      channel, handleClose, handleSubmit, refLink, submitting, pristine,
+      renderFooter, handleConfirm, renderField,
       uniq, requiredField,
     } = this.props;
     return (
-      <Form onSubmit={handleSubmit(handleConfirm(id))}>
-        <Modal.Header>{`Rename '${name}' channel`}</Modal.Header>
+      <Form onSubmit={handleSubmit(handleConfirm(channel.id))}>
+        <Modal.Header>{`Rename '${channel.name}' channel`}</Modal.Header>
         <Modal.Body>
           <Field
             placeholder="Type new name"
