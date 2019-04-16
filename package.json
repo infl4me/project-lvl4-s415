@@ -2,7 +2,7 @@
   "name": "slack",
   "version": "0.0.1",
   "engines": {
-    "node": "9"
+    "node": "11"
   },
   "scripts": {
     "test": "jest",

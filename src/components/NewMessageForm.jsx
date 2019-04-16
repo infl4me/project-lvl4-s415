@@ -7,9 +7,14 @@ import { withUserName, withFormValidation } from './hoc';
 import connect from '../connect';
 
 const Textarea = (field) => {
-  const { input } = field;
+  const { input, meta: { error, touched, submitting } } = field;
+  console.log(field);
   return (
-    <Form.Control {...input} as="textarea" rows="3" placeholder="Type your message here" />
+    <React.Fragment>
+      {touched && submitting && <div className="w-100 text-danger">no no</div>}
+      {touched && error && <div className="w-100 text-danger">{error}</div>}
+      <Form.Control className="w-auto flex-grow-1" {...input} as="textarea" rows="3" placeholder="Type your message here" />
+    </React.Fragment>
   );
 };
 
@@ -45,11 +50,11 @@ class NewMessageForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, requiredField } = this.props;
+    const { handleSubmit, requiredField, submitting } = this.props;
     return (
-      <Form className="d-flex mt-auto" onSubmit={handleSubmit(this.handleSubmit)} ref={this.form}>
+      <Form className="mt-auto p-3 px-5 d-flex flex-wrap" onSubmit={handleSubmit(this.handleSubmit)} ref={this.form}>
         <Field name="message" component={Textarea} validate={[requiredField]} />
-        <Button variant="secondary" type="submit">Send</Button>
+        <Button disabled={submitting} variant="secondary" type="submit">Send</Button>
       </Form>
     );
   }
