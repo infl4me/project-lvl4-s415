@@ -1,10 +1,9 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
 import { Field } from 'redux-form';
-import Form from 'react-bootstrap/Form';
-import { withAutoFocus, withModalHandler, withFormValidation } from './hoc';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { withModalHandler, withFormValidation } from './hoc';
 
-@withAutoFocus()
 @withModalHandler('nameOfNewChannel', 'passNewChannel')
 @withFormValidation()
 class ModalNewChannel extends React.Component {
@@ -15,19 +14,21 @@ class ModalNewChannel extends React.Component {
       uniq, requiredField,
     } = this.props;
     return (
-      <Form onSubmit={handleSubmit(handleConfirm())}>
-        <Modal.Header>Create new channel</Modal.Header>
-        <Modal.Body>
+      <form onSubmit={handleSubmit(handleConfirm())}>
+        <DialogTitle>Create new channel</DialogTitle>
+        <DialogContent>
           <Field
+            autoFocus
             refLink={refLink}
             name="nameOfNewChannel"
             component={renderField}
-            placeholder="Type channel name"
+            label="Channel name"
+            type="text"
             validate={[uniq, requiredField]}
           />
-        </Modal.Body>
+        </DialogContent>
         {renderFooter(pristine, submitting, handleClose)}
-      </Form>
+      </form>
     );
   }
 }

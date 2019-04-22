@@ -1,23 +1,15 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
+import Dialog from '@material-ui/core/Dialog';
 import connect from '../connect';
 
 const mapStateToProps = ({ modal: { modalState, modalProps } }) => ({ modalState, modalProps });
 
 @connect(mapStateToProps)
-class ModalCustom extends React.Component {
-  componentDidMount() {
-    console.log('Modal mounted');
-  }
-
-  componentWillUnmount() {
-    console.log('Modal unmounted');
-  }
-
+class FormDialogCustom extends React.Component {
   handleClose = () => {
     const { removeModal } = this.props;
     removeModal();
-  }
+  };
 
   render() {
     const {
@@ -26,16 +18,22 @@ class ModalCustom extends React.Component {
         renderModalBody,
       },
     } = this.props;
-    const haveModal = modalState !== 'none';
-    if (!haveModal) {
+    const hasModal = modalState !== 'none';
+    if (!hasModal) {
       return null;
     }
     return (
-      <Modal show={haveModal} onHide={this.handleClose}>
-        {renderModalBody(this.handleClose, this.textInput)}
-      </Modal>
+      <div>
+        <Dialog
+          open={hasModal}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          {renderModalBody(this.handleClose)}
+        </Dialog>
+      </div>
     );
   }
 }
 
-export default ModalCustom;
+export default FormDialogCustom;

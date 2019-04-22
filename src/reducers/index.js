@@ -97,10 +97,17 @@ const error = handleActions({
   },
 }, { errorState: 'none', errorProps: {} });
 
+const drawerShown = handleActions({
+  [actions.toggleDrawer](state) {
+    return !state;
+  },
+}, false);
+
 export default combineReducers({
   channels,
   messages,
   error,
   modal,
+  drawerShown,
   form: formReducer,
 });

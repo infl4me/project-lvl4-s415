@@ -9,6 +9,7 @@ export const fetchData = () => (dispatch) => {
   dispatch(addData(gon));
 };
 
+export const toggleDrawer = createAction('DRAWER_TOGGLE');
 
 export const addMessage = createAction('MESSAGE_ADD');
 

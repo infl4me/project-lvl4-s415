@@ -1,31 +1,44 @@
 import React from 'react';
 import { reduxForm, SubmissionError } from 'redux-form';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import connect from '../../connect';
 
 const renderField = (props) => {
   const {
-    input, type, refLink, placeholder, required,
+    input, type, touched, refLink, placeholder, required, label, autoFocus,
     meta: { error },
   } = props;
   return (
     <React.Fragment>
-      <Form.Control {...input} placeholder={placeholder} required={required} ref={refLink} type={type} autoComplete="off" />
-      {error && <div className="text-danger mt-2">{error}</div>}
+      {/* {error && <div className="text-danger mt-2">{error}</div>} */}
+      <TextField
+        {...input}
+        label={label}
+        autoFocus={autoFocus}
+        // error={error}
+        type={type}
+        autoComplete="off"
+        placeholder={placeholder}
+        inputRef={refLink}
+        required={required}
+        margin="dense"
+        fullWidth
+      />
     </React.Fragment>
   );
 };
+
 const renderFooter = (pristine, submitting, handleClose) => (
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleClose}>
+  <DialogActions>
+    <Button onClick={handleClose} color="primary">
       Cancel
     </Button>
-    <Button disabled={submitting || pristine} type="submit" variant="primary">
+    <Button disabled={submitting || pristine} type="submit" color="primary">
       {submitting ? 'Loading...' : 'Confirm'}
     </Button>
-  </Modal.Footer>
+  </DialogActions>
 );
 
 

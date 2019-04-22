@@ -1,15 +1,29 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import ChannelList from './ChannelList';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { withStyles } from '@material-ui/core/styles';
 import MessageList from './MessageList';
 import NewMessageForm from './NewMessageForm';
-import UserBlock from './UserBlock';
 import Alert from './Alert';
 import ModalCustom from './Modal';
 import runSockets from '../sockets';
 import connect from '../connect';
+import Header from './Header';
+import Drawer from './Drawer';
+
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  toolbar: theme.mixins.toolbar,
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
+    overflow: 'auto',
+    padding: 0,
+    flexGrow: 1,
+  },
+});
 
 const mapStateToProps = ({ error: { errorState }, modal: { modalState } }) => (
   { errorState, modalState }
@@ -24,26 +38,22 @@ class App extends React.Component {
   }
 
   render() {
-    const { errorState, modalState } = this.props;
+    const { errorState, modalState, classes } = this.props;
     return (
-      <React.Fragment>
+      <div className={classes.root}>
+        <CssBaseline />
         {errorState !== 'none' ? <Alert /> : null}
         {modalState !== 'none' ? <ModalCustom /> : null}
-        <Container className="p-0" fluid>
-          <Row className="vh-100 no-gutters">
-            <Col className="bg-dark p-0 text-white" md={2}>
-              <UserBlock />
-              <ChannelList />
-            </Col>
-            <Col className="p-0 d-flex flex-column" md={10}>
-              <MessageList />
-              <NewMessageForm />
-            </Col>
-          </Row>
-        </Container>
-      </React.Fragment>
+        <Header />
+        <Drawer />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <MessageList />
+          <NewMessageForm />
+        </main>
+      </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles, { withTheme: true })(App);

@@ -3,25 +3,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import thunk from 'redux-thunk';
 import faker from 'faker';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Cookie from 'js-cookie';
 import reducers from './reducers';
 import App from './components/App';
 import { UserNameProvider } from './components/userNameContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
+import 'typeface-roboto';
 
-library.add(faPlus);
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
-
-// eslint-disable-next-line no-undef
-console.log(gon);
 
 let username = Cookie.get('username');
 if (!username) {
@@ -34,18 +29,36 @@ const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__;
 /* eslint-enable */
 
 // can't pass undefined to compose
-const args = [applyMiddleware(thunk), reduxDevtools && reduxDevtools()].filter(Boolean);
+const args = [
+  applyMiddleware(thunk),
+  reduxDevtools && reduxDevtools(),
+].filter(Boolean);
 
 const store = createStore(
   reducers,
   compose(...args),
 );
 
+const theme = createMuiTheme({
+  palette: {
+    channels: {
+      main: '#1A1D21',
+    },
+  },
+  mixins: {
+    drawerWidth: '240px',
+  },
+});
+
+console.log(theme);
+
 ReactDOM.render(
   <Provider store={store}>
-    <UserNameProvider value={username}>
-      <App />
-    </UserNameProvider>
+    <MuiThemeProvider theme={theme}>
+      <UserNameProvider value={username}>
+        <App />
+      </UserNameProvider>
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root'),
 );

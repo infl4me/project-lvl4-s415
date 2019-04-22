@@ -11,7 +11,32 @@ export default (router, io) => {
       { id: generalChannelId, name: 'general', removable: false },
       { id: randomChannelId, name: 'random', removable: false },
     ],
-    messages: [],
+    messages: [
+      {
+        id: getNextId(),
+        username: 'ans',
+        message: 'aasdoiqwoes oaksod kaposdk ao skdpoa ks',
+        channelId: 1,
+      },
+      {
+        id: getNextId(),
+        username: 'qwe',
+        message: 'aasdoiqwoes oaksod kaposdk ao skdpoa QQQQ!!!!',
+        channelId: 1,
+      },
+      {
+        id: getNextId(),
+        username: 'dan',
+        message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nemo excepturi facere dignissimos dolorum iusto minima veniam repellat fugiat! Doloribus repudiandae ducimus excepturi repellendus rem vitae asperiores temporibus, sed animi.',
+        channelId: 1,
+      },
+      {
+        id: getNextId(),
+        username: 'george',
+        message: 'aasdoiqwoes oaksod kaposdk ao skdpoa QQQQ!!!!',
+        channelId: 1,
+      },
+    ],
     currentChannelId: generalChannelId,
   };
 

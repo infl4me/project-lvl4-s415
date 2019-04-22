@@ -1,7 +1,7 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
 import { Field } from 'redux-form';
-import Form from 'react-bootstrap/Form';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { withAutoFocus, withFormValidation, withModalHandler } from './hoc';
 
 @withAutoFocus('select')
@@ -20,20 +20,20 @@ class ModalChannelRename extends React.Component {
       uniq, requiredField,
     } = this.props;
     return (
-      <Form onSubmit={handleSubmit(handleConfirm(channel.id))}>
-        <Modal.Header>{`Rename '${channel.name}' channel`}</Modal.Header>
-        <Modal.Body>
+      <form onSubmit={handleSubmit(handleConfirm(channel.id))}>
+        <DialogTitle>{`Rename '${channel.name}' channel`}</DialogTitle>
+        <DialogContent>
           <Field
-            placeholder="Type new name"
             refLink={refLink}
+            label="Channel new name"
             name="newNameOfChannel"
             component={renderField}
             type="text"
             validate={[uniq, requiredField]}
           />
-        </Modal.Body>
+        </DialogContent>
         {renderFooter(pristine, submitting, handleClose)}
-      </Form>
+      </form>
     );
   }
 }
